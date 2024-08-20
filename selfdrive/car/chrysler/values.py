@@ -15,6 +15,7 @@ Button = namedtuple('Button', ['event_type', 'can_addr', 'can_msg', 'values'])
 class ChryslerFlags(IntFlag):
   # Detected flags
   HIGHER_MIN_STEERING_SPEED = 1
+  RAM_HD_ALT_BUTTONS = 2
 
 
 class ChryslerFlagsSP(IntFlag):

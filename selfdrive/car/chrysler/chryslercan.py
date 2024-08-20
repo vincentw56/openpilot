@@ -1,5 +1,5 @@
 from cereal import car
-from openpilot.selfdrive.car.chrysler.values import RAM_CARS
+from openpilot.selfdrive.car.chrysler.values import RAM_CARS, ChryslerFlags
 
 GearShifter = car.CarState.GearShifter
 VisualAlert = car.CarControl.HUDControl.VisualAlert
@@ -78,7 +78,8 @@ def create_cruise_buttons(packer, frame, bus, CP, cruise_buttons_msg=None, butto
 
   if buttons == 0 and not (cancel or resume) and CP.carFingerprint in RAM_CARS:
     values = cruise_buttons_msg.copy()
-  return packer.make_can_msg("CRUISE_BUTTONS", bus, values)
+  button_message = "CRUISE_BUTTONS_ALT" if CP.flags & ChryslerFlags.RAM_HD_ALT_BUTTONS else "CRUISE_BUTTONS"
+  return packer.make_can_msg(button_message, bus, values)
 
 
 def create_lkas_heartbit(packer, lkas_disabled, lkas_heartbit):
